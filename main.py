@@ -6,7 +6,7 @@ import datetime
 import matplotlib.pyplot as plt
 
 
-filename = "SHFE.NI.CSV"
+filename = "../RawData/SHFE.NI.CSV"
 df = pd.read_csv(filename)
 stock_data = StockDataFrame.retype(df)
 print(df.columns)
