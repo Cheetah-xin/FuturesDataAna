@@ -22,12 +22,13 @@ def getdata2(future_code='AAPL',
 def get_futures_minute_data(symbol):
     futures_zh_minute_sina_df = ak.futures_zh_minute_sina(symbol=symbol, period="1")
     return futures_zh_minute_sina_df
-def get_futures_daily_data(symbol, start,end):
+def get_futures_daily_data(symbol):
     futures_daily_df = ak.futures_zh_daily_sina(symbol=symbol)
     return futures_daily_df
 
 if __name__=="__main__":
     symbol_set={"RM2505","OI2505","m2505","ni2505"}
+    symbol_set={"RM0","OI0","M0","NI0",'AG0','RB0'}
     # minite
     for symbol in symbol_set:
         try:
@@ -46,7 +47,11 @@ if __name__=="__main__":
     for symbol in symbol_set:
         try:
             data = get_futures_daily_data(symbol=symbol)
-            filename_daily = "./download_data/{symbol}_daily.csv".format(symbol=symbol)
+            start=data['date'].min()
+            start_str = re.sub(r'[ :-]', '',start)
+            end = data['date'].max()
+            end_str = re.sub(r'[ :-]', '',end)
+            filename_daily = "./download_data/{symbol}_daily_{start}_{end}.csv".format(symbol=symbol,start=start_str,end=end_str)
             data.to_csv(filename_daily)
         except Exception as e:
             print(e)
