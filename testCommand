@@ -1,5 +1,0 @@
-import akshare as ak
-
-#get data 
-futures_display_main_sina_df = ak.futures_display_main_sina()
-print(futures_display_main_sina_df)
