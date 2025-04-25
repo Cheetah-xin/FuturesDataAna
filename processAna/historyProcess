@@ -1,0 +1,25 @@
+import pandas as pd
+import backtrader as bt
+import backtrader.indicators as btind
+import backtrader.feeds as btfeeds
+cerebro = bt.Cerebro()
+class myStragety(bt.Strategy):
+    def __init__(self):
+        sma = btind.MovingAverageSimple(self.data,period=20)
+        close_over_sma = self.close>sma
+        sma_dist_to_high =self.data.high-sma
+        sma_dist_to_small = self.data.high-sma
+        sell_sig = bt.And(close_over_sma,sma_dist_to_small)
+    def next(self):
+        if self.sell_sig:
+            print("time to sell")
+
+filename = "./download_data/JD0_min_20250421105800_20250425150000.csv"
+df =pd.read_csv(filename)
+pass
+df.set_index('datetime',inplace=True)
+data_feed = btfeeds.PandasData(dataname=df)
+cerebro.adddata(data_feed)
+cerebro.addstrategy(myStragety)
+cerebro.run()
+    
