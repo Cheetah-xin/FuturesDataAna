@@ -14,8 +14,9 @@ class myStragety(bt.Strategy):
         if self.sell_sig:
             print("time to sell")
 
-filename = "./download_data/JD0_min_20250421105800_20250425150000.csv"
-df =pd.read_csv(filename)
+filename_min = "./demo_data/AG0_min.csv"
+filename_daily = "./demo_data/AG0_min.csv"
+df =pd.read_csv(filename_min)
 pass
 df.set_index('datetime',inplace=True)
 data_feed = btfeeds.PandasData(dataname=df)
