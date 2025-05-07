@@ -38,7 +38,7 @@ if __name__=="__main__":
             start_str = re.sub(r'[ :-]', '',start)
             end = data['datetime'].max()
             end_str = re.sub(r'[ :-]', '',end)
-            filename_minute = "./download_data/{symbol}_min_{start}_{end}.csv".format(symbol=symbol,start=start_str,end=end_str)
+            filename_minute = "../download_data/{symbol}_min_{start}_{end}.csv".format(symbol=symbol,start=start_str,end=end_str)
             data.to_csv(filename_minute,index=False)
         except Exception as e:
             print (e)
@@ -52,7 +52,7 @@ if __name__=="__main__":
             start_str = re.sub(r'[ :-]', '',start)
             end = data['date'].max()
             end_str = re.sub(r'[ :-]', '',end)
-            filename_daily = "./download_data/{symbol}_daily_{start}_{end}.csv".format(symbol=symbol,start=start_str,end=end_str)
+            filename_daily = "../download_data/{symbol}_daily_{start}_{end}.csv".format(symbol=symbol,start=start_str,end=end_str)
             data.to_csv(filename_daily)
         except Exception as e:
             print(e)
