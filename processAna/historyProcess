@@ -4,6 +4,22 @@ import backtrader.indicators as btind
 import backtrader.feeds as btfeeds
 from datetime import datetime
 cerebro = bt.Cerebro()
+class SmaCross(bt.Strategy):
+    params = dict(pfast = 10 ,pslow = 30)
+    def __init__(self):
+        sma1 = bt.ind.SMA(period = self.params.pfast)
+        sma2 = bt.ind.SMA(period = self.params.pslow)
+        self.crossover = bt.ind.CrossOver(sma1,sma2)
+    
+    def next(self):
+        if not self.position:
+            if self.crossover>0:
+                self.buy()
+        elif self.crossover<0:
+            self.close()
+ 
+
+'''
 class myStragety(bt.Strategy):
     def __init__(self):
         sma = btind.MovingAverageSimple(self.data,period=20)
@@ -14,7 +30,7 @@ class myStragety(bt.Strategy):
     def next(self):
         if self.sell_sig:
             print("time to sell")
-
+'''
 filename_min = "./demo_data/AG0_min.csv"
 filename_daily = "./demo_data/AG0_daily.csv"
 df =pd.read_csv(filename_min)
@@ -23,6 +39,7 @@ df['datetime'] = df['datetime'].map(lambda x: datetime.strptime(x, "%Y-%m-%d %H:
 df.set_index('datetime',inplace=True)
 data_feed = btfeeds.PandasData(dataname=df)
 cerebro.adddata(data_feed)
-cerebro.addstrategy(myStragety)
+cerebro.addstrategy(SmaCross)
 cerebro.run()
+cerebro.plot()
     
