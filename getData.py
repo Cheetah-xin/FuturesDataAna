@@ -27,9 +27,8 @@ def get_futures_daily_data(symbol):
     return futures_daily_df
 
 if __name__=="__main__":
-    symbol_set={"RM2505","OI2505","m2505","ni2505"}
     symbol_set={"RM0","OI0","M0","NI0",'AG0','RB0','AU0','JD0','RB0','RU0',
-                'TL0','TS0','T0','TF0','JD0'}
+                'TL0','TS0','T0','TF0','JD0','SN0','P0'}
     # minite
     for symbol in symbol_set:
         try:

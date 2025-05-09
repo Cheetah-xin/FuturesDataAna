@@ -34,7 +34,6 @@ class myStragety(bt.Strategy):
 filename_min = "./demo_data/AG0_min.csv"
 filename_daily = "./demo_data/AG0_daily.csv"
 df =pd.read_csv(filename_min)
-pass
 df['datetime'] = df['datetime'].map(lambda x: datetime.strptime(x, "%Y-%m-%d %H:%M:%S"))
 df.set_index('datetime',inplace=True)
 data_feed = btfeeds.PandasData(dataname=df)
